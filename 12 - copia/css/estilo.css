@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+
+* 
+{
+	margin: 0;
+	font-family: 'Merienda', cursive;
+	background: lightgreen;
+}
+
+h1 
+{
+	background-color: darkgreen;
+	font-size: 50px;
+	text-align: center;
+	color: white;
+}
+
+h1 img 
+{
+	background-color: darkgreen;
+}
+
+h2 
+{
+	color: green;
+}
+
+#carritoDeCompras
+{
+	border: 1px black solid;
+	color: darkred;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+#ofertaImpresa img
+{
+	width: 150px;
+	height: 150px;
+}
+
+.carritoGrid
+{
+	background-color: white;
+	width: 30%;
+	margin: auto;
+	border-radius: 20px;
+}
+
+.fdbc
+{
+	background-color: white;
+}
+
+ul
+{
+	padding: 0px;
+	list-style: none;
+}
+
+li
+{
+	background-color: white;
+	font-weight: bold;
+}
+
+form input
+{
+	display: inline-block;
+	margin: 10px;
+	width: 40%;
+	padding: 5px;
+}
+
+#ofertaImpresa
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#ofertaImpresa div
+{
+	display: flex;
+	background-color: whitesmoke;
+	flex-direction: column;
+	width: 200px;
+	height: 300px;
+	align-items: center;
+	margin: 10px 0;
+	border-radius: 10px;
+}
+
+#ofertaImpresa div h3
+{
+	height: 55px;
+	width: 190px;
+	text-align: center;
+	background-color: whitesmoke;
+}
+
+div p, span, select, option
+{
+	background-color: whitesmoke;
+}
+
+select
+{
+	width: 80px;
+}
+
+button, #btnComprar, #btnCancelar
+{
+	background-color: darkgreen;
+	color: white;
+	border-radius: 20px;
+	font-size: 15px;
+}
+
+a 
+{
+	background-color: darkgreen;
+	color: white;
+	text-decoration: none;
+}
+
+a:visited
+{
+	color: white;
+}
+
+#listoParaComprar
+{
+	background-color: white;
+	width: 30%;
+	margin: auto;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+input
+{
+	background-color: #804000 ;
+	border-radius: 10px;
+}
+
+::placeholder
+{
+	color: white;
+}
+
+#productosAPagar
+{
+	font-weight: bold;
+}

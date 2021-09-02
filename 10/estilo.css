@@ -1,0 +1,129 @@
+* {
+	margin: 0;
+	font-family: 'Merienda', cursive;
+	/* font-family: 'Satisfy', cursive; */
+	background: lightgreen;
+}
+
+h1 
+{
+	color: darkgreen;
+	font-size: 50px;
+	text-align: center;
+}
+
+h2 
+{
+	color: green;
+}
+
+#carritoDeCompras
+{
+	border: 1px black solid;
+	color: darkred;
+	margin: 10px 0;
+	padding: 10px;
+	background-color:lightcyan;
+}
+
+#carritoDeCompras  p, ul, li, strong
+{
+	background-color: lightcyan;
+}
+
+img
+{
+	width: 150px;
+	height: 150px;
+}
+
+.gridBody
+{
+	display: grid;
+	grid-template-areas:
+	"titulo titulo titulo titulo titulo"
+	"carritoGrid carritoGrid carritoGrid carritoGrid carritoGrid "
+	"subTitulo subTitulo subTitulo subTitulo subTitulo "
+	"y1 y2 y3 y4 none"
+	"subTitulo2 subTitulo2 subTitulo2 subTitulo2 subTitulo2 "
+	"y5 y6 y7 y8 y9"
+	;
+	grid-template-rows: auto auto 10% 35% 10% 35%;
+	grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.titulo
+{
+	grid-area: titulo;
+}
+
+.carritoGrid 
+{
+	grid-area: carritoGrid;
+	justify-self: center;
+	width: 30%;
+	align-items: center;
+}
+
+.subTitulo
+{
+	grid-area: subTitulo;
+	text-align: center;
+}
+
+.subTitulo2
+{
+	grid-area: subTitulo2;
+	text-align: center;
+}
+
+.y1
+{
+	grid-area: y1;
+}
+
+.y2
+{
+	grid-area: y2;
+}
+
+.y3
+{
+	grid-area: y3;
+}
+
+.y4
+{
+	grid-area: y4;
+}
+
+.y5
+{
+	grid-area: y5;
+}
+
+.y6
+{
+	grid-area: y6;
+}
+
+.y7
+{
+	grid-area: y7;
+}
+
+.y8
+{
+	grid-area: y8;
+}
+
+.y9
+{
+	grid-area: y9;
+}
+
+ul
+{
+	padding: 0px;
+	list-style: none;
+}
