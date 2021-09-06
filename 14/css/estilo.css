@@ -47,7 +47,7 @@ h2
 	border-radius: 20px;
 }
 
-.fdbc
+.fondoBlanco
 {
 	background-color: white;
 }
@@ -58,7 +58,7 @@ ul
 	list-style: none;
 }
 
-li
+#productosEnCarrito, li
 {
 	background-color: white;
 	font-weight: bold;
@@ -110,7 +110,7 @@ select
 	width: 80px;
 }
 
-button, #btnComprar, #btnCancelar
+button, #btnComprar
 {
 	background-color: darkgreen;
 	color: white;
@@ -154,4 +154,16 @@ input
 #productosAPagar
 {
 	font-weight: bold;
+}
+
+.rojo
+{
+	background-color: darkred;
+}
+
+#btnCancelar
+{
+	color: white;
+	border-radius: 20px;
+	font-size: 15px;
 }
