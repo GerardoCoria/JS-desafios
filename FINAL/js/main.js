@@ -10,7 +10,6 @@ let precioActualizado=0;
 // A EJECUTAR CUANDO CARGA LA PÁGINA 
 $(document).ready(function()
 {
-
 // SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
   
@@ -49,27 +48,56 @@ $(document).ready(function()
                     <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
                     <span>Cantidad:</span>
-                    <select name="" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <input id="cantidad" type="number" value="1" min="1" max="10">
                     </select>
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
+
+// ANIMACION DE LOS OBJETOS DEL DOM
+
+                    $(`#ofertaImpresa`).slideDown(2000);
+
+// cantidades
+
+                    $("#cantidad").change(function()
+                    {
+                        actualizarCantidad(this);
+                    });
+
+                    function actualizarCantidad(cantidades)
+                    {
+                        ;
+                    }
+
+// BOTON PARA COMPRAR
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`)
+                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
+
                         if (confirmarProducto)
                         {
-                            alert(`Agregaste ${yerbaItem.nombre} al carrito`);
+                            alert(`Agregaste ${cantidades} de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
                             return false;
                         }
-             
+
+// ANIMACION DEL CARRITO DEL DOM
+
+                            $(".carritoGrid").animate({
+                                            width: "40%",
+                                            opacity: "0.1",},
+                                            "slow",
+                                            function(){
+                                            $(".carritoGrid").animate({
+                                                            width: "30%",
+                                                            opacity: "1"},
+                                                            "slow",)
+                                            } 
+                            )
+
 //AGREGAR AL CARRITO CADA PRODUCTO + JSON STORAGE
-             
                         carrito.push(yerbaItem);
                         localStorage.setItem('carrito', JSON.stringify(carrito));
              
@@ -123,5 +151,7 @@ $("#borrarCarrito").click(function()
     }
 }
 )
-
 });
+
+
+

@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "nombre": "Yerba Taragüi",
+        "precio": 350,
+        "imagen":"media/taragui.webp"
+    },
+    {
+        "id": 2,
+        "nombre": "Yerba La Merced",
+        "precio": 450,
+        "imagen": "media/lamerced.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Yerba Rosamonte",
+        "precio":300,
+        "imagen": "media/rosamonte.webp"
+    },
+    {
+        "id": 4,
+        "nombre":"Yerba Cachamate",
+        "precio": 250,
+        "imagen": "media/cachamate.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Mate estilo 'camionero'",
+        "precio": 5350,
+        "imagen": "media/camionero.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Mate estilo 'torpedo'",
+        "precio": 4450,
+        "imagen": "media/torpedo.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "Bombilla de alpaca artesanal",
+        "precio": 500,
+        "imagen": "media/bombilla.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "Termo", 
+        "precio": 2000,
+        "imagen": "media/termo.jpg"
+    },
+    {
+        "id": 9,
+        "nombre": "Bolso matero", 
+        "precio": 3000,
+        "imagen": "media/bolso.jpg"
+    }
+]

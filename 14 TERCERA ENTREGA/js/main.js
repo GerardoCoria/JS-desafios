@@ -10,7 +10,6 @@ let precioActualizado=0;
 // A EJECUTAR CUANDO CARGA LA PÁGINA 
 $(document).ready(function()
 {
-
 // SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
   
@@ -50,18 +49,38 @@ $(document).ready(function()
                     <img src=${yerbaItem.imagen}>
                     <span>Cantidad:</span>
                     <select name="" id="">
-                    <option value="1">1</option>
+                    <option value="1"${1}>1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     </select>
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
+
+// ANIMACION DE LOS OBJETOS DEL DOM
+
+                    $(`#ofertaImpresa`).slideDown(2000);
+
+// BOTON PARA COMPRAR
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
                         let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`)
                         if (confirmarProducto)
                         {
                             alert(`Agregaste ${yerbaItem.nombre} al carrito`);
+
+// ANIMACION DEL CARRITO DEL DOM
+
+                            $(".carritoGrid").animate({
+                                            width: "40%",
+                                            opacity: "0.1",},
+                                            "slow",
+                                            function(){
+                                            $(".carritoGrid").animate({
+                                                            width: "30%",
+                                                            opacity: "1"},
+                                                            "slow",)
+                                            } 
+                            )
                         }
                         else
                         {
@@ -123,5 +142,7 @@ $("#borrarCarrito").click(function()
     }
 }
 )
-
 });
+
+
+
