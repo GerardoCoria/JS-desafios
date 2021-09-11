@@ -1,7 +1,7 @@
 // VARIABLES GLOBALES
 let carrito =[];
 let listaPrecio = 0;
-let linkJson = "https://raw.githubusercontent.com/GerardoCoria/JS-desafios/main/14/js/datos.json";
+let linkJson = "https://raw.githubusercontent.com/GerardoCoria/JS-desafios/main/FINAL/js/datos.json";
 let carritoRecuperado = JSON.parse(localStorage.getItem('carrito')); 
 let listaRecuperada =[];
 let precioRecuperado= 0;
@@ -48,8 +48,7 @@ $(document).ready(function()
                     <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
                     <span>Cantidad:</span>
-                    <input id="cantidad" type="number" value="1" min="1" max="10">
-                    </select>
+                    <input type="number" min="1" max="10" value=${yerbaItem.cantidad}>
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 
@@ -58,16 +57,10 @@ $(document).ready(function()
                     $(`#ofertaImpresa`).slideDown(2000);
 
 // cantidades
-
-                    $("#cantidad").change(function()
+                    $(`${yerbaItem.cantidad}`).change(function()
                     {
-                        actualizarCantidad(this);
+                        actualizarCantidad(cantidades);
                     });
-
-                    function actualizarCantidad(cantidades)
-                    {
-                        ;
-                    }
 
 // BOTON PARA COMPRAR
                     $(`#btn${yerbaItem.id}`).on("click", function () 
@@ -76,7 +69,7 @@ $(document).ready(function()
 
                         if (confirmarProducto)
                         {
-                            alert(`Agregaste ${cantidades} de ${yerbaItem.nombre} al carrito`);
+                            alert(`Agregaste ${yerbaItem.cantidad} de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
