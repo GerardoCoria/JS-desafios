@@ -7,12 +7,11 @@ let listaRecuperada =[];
 let precioRecuperado= 0;
 let precioActualizado=0;
 
-// A EJECUTAR CUANDO CARGA LA PÁGINA 
-$(document).ready(function()
-{
 // SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
-  
+
+function mostrarCarritoRecuperado()
+{
     for (const precio of carritoRecuperado)
     {
         precioRecuperado = precio.precio + precioRecuperado;
@@ -33,10 +32,21 @@ $(document).ready(function()
     {
         carrito.push(item);
     }
+}
+
+
+function obtenerCantidad()
+{
+    var cantidades =  document.getElementById("selector").value;
+    alert(cantidades);
+}
 
 // MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE Y BOTONES 
 
-    $.getJSON(linkJson, function(respuesta, estado){
+function mostrarOferta()
+{
+    $.getJSON(linkJson, function(respuesta, estado)
+    {
         if(estado === "success")
         {
             let datosYerbas = respuesta;
@@ -48,7 +58,13 @@ $(document).ready(function()
                     <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
                     <span>Cantidad:</span>
-                    <input type="number" min="1" max="10" value=${yerbaItem.cantidad}>
+                    <select id="selector" onchange="obtenerCantidad()")>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 
@@ -56,39 +72,19 @@ $(document).ready(function()
 
                     $(`#ofertaImpresa`).slideDown(2000);
 
-// cantidades
-                    $(`${yerbaItem.cantidad}`).change(function()
-                    {
-                        actualizarCantidad(cantidades);
-                    });
-
-// BOTON PARA COMPRAR
+// BOTON PARA COMPRAR                   
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
                         let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
-
                         if (confirmarProducto)
                         {
-                            alert(`Agregaste ${yerbaItem.cantidad} de ${yerbaItem.nombre} al carrito`);
+
+                            alert(`Agregaste ${obtenerCantidad()} de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
                             return false;
                         }
-
-// ANIMACION DEL CARRITO DEL DOM
-
-                            $(".carritoGrid").animate({
-                                            width: "40%",
-                                            opacity: "0.1",},
-                                            "slow",
-                                            function(){
-                                            $(".carritoGrid").animate({
-                                                            width: "30%",
-                                                            opacity: "1"},
-                                                            "slow",)
-                                            } 
-                            )
 
 //AGREGAR AL CARRITO CADA PRODUCTO + JSON STORAGE
                         carrito.push(yerbaItem);
@@ -106,6 +102,7 @@ $(document).ready(function()
             }
         }
     })
+};
 
 
 // BOTON PARA CONFIRMAR COMPRA
@@ -123,7 +120,6 @@ $("#btnConfirmar").click(function()
         }
     }
 );
-
 
 // BOTON PARA LIMPIAR CARRITO
 
@@ -143,8 +139,10 @@ $("#borrarCarrito").click(function()
         return false;
     }
 }
+);
+
+// A EJECUTAR CUANDO CARGA LA PÁGINA 
+$(document).ready(
+    mostrarCarritoRecuperado(),
+    mostrarOferta ()
 )
-});
-
-
-
