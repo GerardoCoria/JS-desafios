@@ -6,6 +6,7 @@ let carritoRecuperado = JSON.parse(localStorage.getItem('carrito'));
 let listaRecuperada =[];
 let precioRecuperado= 0;
 let precioActualizado=0;
+let cantidades=1;
 
 // SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
@@ -35,11 +36,11 @@ function mostrarCarritoRecuperado()
 }
 
 
-function obtenerCantidad()
-{
-    var cantidades =  document.getElementById("selector").value;
-    alert(cantidades);
-}
+// function obtenerCantidad()
+// {
+//     cantidades =  $(".selector").val();
+//     return cantidades;
+// }
 
 // MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE Y BOTONES 
 
@@ -58,28 +59,24 @@ function mostrarOferta()
                     <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
                     <span>Cantidad:</span>
-                    <select id="selector" onchange="obtenerCantidad()")>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <input class="selector${yerbaItem.id}" type="number" min="1" max="10" value="1">
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 
-// ANIMACION DE LOS OBJETOS DEL DOM
-
-                    $(`#ofertaImpresa`).slideDown(2000);
-
+// AGREGO CANTIDAD
+                    // $(`.selector${yerbaItem.id}`).change((e) => { 
+                    //     cantidades = e.target.value;
+                    // });
+                    
 // BOTON PARA COMPRAR                   
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
                         let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
+                        
                         if (confirmarProducto)
                         {
-
-                            alert(`Agregaste ${obtenerCantidad()} de ${yerbaItem.nombre} al carrito`);
+                            cantidades = $(`.selector${yerbaItem.id}`).val();
+                            alert(`Agregaste ${cantidades} de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
@@ -97,7 +94,10 @@ function mostrarOferta()
              
 // AGREGO LOS PRODUCTOS DEL CARRITO AL DOM
                         $("#productosEnCarrito").append(`<li>${yerbaItem.nombre}</li>`);
-                    
+
+                        //RESETEO
+                        cantidades=1;
+                        $(".selector").val(1);                    
                     })          
             }
         }
