@@ -7,44 +7,133 @@
 	background: lightgreen;
 }
 
-h1 
+body
 {
-	background-color: darkgreen;
-	font-size: 50px;
-	text-align: center;
-	color: white;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 20vh 200px auto 20vh;
+	grid-template-areas: 
+	"header"
+	"intro"
+	"ofertaImpresa"
+	"footer";
 }
 
-h1 img 
+footer
+{
+	grid-area: footer;
+	background-color: darkgreen;
+}
+
+.fondoVerde
 {
 	background-color: darkgreen;
 }
 
-h2 
+header
 {
-	color: green;
+	display: grid;
+	position: fixed;
+	grid-template-columns: 75vw 25vw;
+	grid-template-rows: 100%;
+	grid-template-areas: 
+	"titulo carritoDeCompras";
+	height: 20vh;
+	z-index: 2;
+}
+
+#titulo
+{
+	display: flex;
+	grid-area: titulo;
+	justify-content:flex-start;
+	align-items: center;
 }
 
 #carritoDeCompras
 {
-	border: 1px black solid;
-	color: darkred;
-	margin: 10px 0;
-	padding: 10px;
+	display: flex;
+	grid-area: carritoDeCompras;
+	justify-content: center;
+	align-items: center;
+}
+
+#carritoDeCompras img
+{
+	margin:10px;
+}
+
+#btnCarrito
+{
+	background-color: rgb(1, 71, 1);
+	color: white;
+	border-radius: 20px;
+	font-size: 20px;
+	padding: 0 20px;
+	outline: none;
+}
+
+#contador
+{
+	background-color: red;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	font-size: 15px;
+	color: white;
+	padding: 5px;
+	margin: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
+h1 
+{
+	font-size: 50px;
+	text-align: left;
+	color: white;
+	height: 20vh;
+}
+
+#intro
+{
+	grid-area: intro;
+	background-image: url(../media/cultura.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 200px;
+	position: relative;
+	z-index: 1;
+}
+
+#intro p
+{
+	font-size: 4vh;
+	font-weight: bold;
+	text-align: center;
+	position: absolute;
+	background-color: #eeeeee99;
+	margin: 10vw;
+	top: -10vh;
+}
+
+#listaCarrito
+{
+	display: none;
+	position: absolute;
+	top: 18vh;
+	left: 60%;
+	border: 1px solid black;
+	width: 35%;
+	background-color: grey;
+	z-index: 999;
 }
 
 #ofertaImpresa img
 {
 	width: 150px;
 	height: 150px;
-}
-
-.carritoGrid
-{
-	background-color: white;
-	width: 30%;
-	margin: auto;
-	border-radius: 20px;
 }
 
 .fondoBlanco
@@ -56,12 +145,6 @@ ul
 {
 	padding: 0px;
 	list-style: none;
-}
-
-#productosEnCarrito, li
-{
-	background-color: white;
-	font-weight: bold;
 }
 
 #formulario
@@ -80,6 +163,7 @@ form input
 
 #ofertaImpresa
 {
+	grid-area: ofertaImpresa;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -106,17 +190,12 @@ form input
 	background-color: whitesmoke;
 }
 
-div p, span, select, option
-{
-	background-color: whitesmoke;
-}
-
 select
 {
 	width: 80px;
 }
 
-button, #btnComprar
+#btnComprar
 {
 	background-color: darkgreen;
 	color: white;

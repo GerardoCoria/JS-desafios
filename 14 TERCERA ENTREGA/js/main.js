@@ -13,7 +13,6 @@ $(document).ready(function()
 // SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
 
 var xhttp = new XMLHttpRequest();
-
 xhttp.open('GET', 'datos.json', true);
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
   

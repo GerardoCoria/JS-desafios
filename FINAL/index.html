@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tercera entrega</title>
+    <title>Entrega final</title>
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
-<body class="gridBody">
-    <header>
-        <h1>Tomemos mate! <img src="media/mate-icono.png" alt="" width="50px"> Tienda online</h1>
-    </header>
-        <p>Acá podés comparar precios, marcas y llevarte tu yerba mate favorita y tu accesorio para tomarte unos ricos mates!</p>
-    <section class="carritoGrid">
-        <img src="media/carrito.png" alt="" height="40px" class="fondoBlanco">
-        <h3 class="fondoBlanco">Carrito de compras</h3>
-        <div id="precioDelCarrito" class="fondoBlanco">
-        </div>
-        <div class="fondoBlanco">
-            <span class="fondoBlanco">Productos agregados:</span>
-            <ul id="productosEnCarrito" class="fondoBlanco">
-            </ul>
-        </div>
-        <button  id="btnConfirmar"><a href="html/pago.html">Confirmar compra</a></button>
-        <button id="borrarCarrito" class="rojo">Limpiar carrito</button>
+<body>
+<!-- ENCABEZADO -->
+    <header class="fondoVerde">
+<!-- TITULO, LOGO -->
+        <section id="titulo" class="fondoVerde">
+            <h1 class="fondoVerde">Tomemos mate! <img src="media/mate-icono.png" alt="" width="50px" class="fondoVerde"> Tienda online</h1>
+        </section>
+<!-- BOTONES DEL CARRITO -->
+        <section id="carritoDeCompras" class="fondoVerde">
+            <img src="media/carrito2.png" alt="" height="40px" class="fondoVerde">
+            <button id="btnCarrito">Carrito</button>
+            <span id="contador"></span>
+        </section>
+        <!-- LISTA DEL CARRITO -->
+        <section id="listaCarrito">
+            <table id="tablaCarrito">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio por unidad</th>
+                    <th>Precio total</th>
+                </tr>
+            </table>`
 
-    </section> 
+            <!-- BOTONES -->
+            <button  id="btnConfirmar"><a href="html/pago.html">Confirmar compra</a></button>
+            <button id="borrarCarrito" class="rojo">Limpiar carrito</button>
+        </section>
+    </header>
+
+
+    <section id="intro">
+        <p>Acá podés comparar precios, marcas y llevarte tu yerba mate favorita y tu accesorio para tomarte unos ricos mates!</p>
+    </section>
+
+<!-- OFERTA DE PRODUCTOS -->
     <section id="ofertaImpresa">
 
     </section>
+    <footer>
 
+    </footer>
+<!-- LINKS DE JAVASCRIPT Y JQUERY -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/main.js"></script>
 </body>

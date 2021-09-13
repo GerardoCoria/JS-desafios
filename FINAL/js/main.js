@@ -7,43 +7,36 @@ let listaRecuperada =[];
 let precioRecuperado= 0;
 let precioActualizado=0;
 let cantidades=1;
+let contador=0;
 
-// SE MUESTRA SI HAY PRODUCTOS EN EL CARRITO, EN CASO DE QUE SE RECARGUE LA PAGINA ACCIDENTALMENTE
-// SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
-
+// FUNCIONES POR SI LA PAGINA SE RECARGA ACCIDENTALMENTE
+// SI HAY ITEMS EN EL CARRITO, MUESTRA PRECIO
 function mostrarCarritoRecuperado()
 {
     for (const precio of carritoRecuperado)
     {
         precioRecuperado = precio.precio + precioRecuperado;
     }
-    $("#precioDelCarrito").text(`Valor de la compra: $${precioRecuperado}`);
+    $("#precioDelCarrito").text(`Total: $${precioRecuperado}`);
 
-// SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRODUCTOS:
-
+// SI HAY ITEMS EN EL CARRITO, MUESTRA PRODUCTOS
     for (const nombre of carritoRecuperado)
     {
         listaRecuperada.push(nombre.nombre+"<br>");
     }
     $("#productosEnCarrito").append(listaRecuperada);
 
-// VUELVO A PUSHEAR LOS PRODUCTOS EN EL CARRITO
-
+// VUELVO A PUSHEAR LOS ITEMS EN EL CARRITO
     for (const item of carritoRecuperado)
     {
         carrito.push(item);
     }
+
+// ACTUALIZO EL CONTADOR DEL CARRITO
+    contadorCarrito();
 }
 
-
-// function obtenerCantidad()
-// {
-//     cantidades =  $(".selector").val();
-//     return cantidades;
-// }
-
-// MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE Y BOTONES 
-
+// MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE E INPUTS
 function mostrarOferta()
 {
     $.getJSON(linkJson, function(respuesta, estado)
@@ -62,51 +55,74 @@ function mostrarOferta()
                     <input class="selector${yerbaItem.id}" type="number" min="1" max="10" value="1">
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
-
-// AGREGO CANTIDAD
-                    // $(`.selector${yerbaItem.id}`).change((e) => { 
-                    //     cantidades = e.target.value;
-                    // });
                     
 // BOTON PARA COMPRAR                   
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
-                        
+                        cantidades = $(`.selector${yerbaItem.id}`).val();
+                        let confirmarProducto = confirm (`¿Está seguro de agregar ${cantidades} unidad/es de ${yerbaItem.nombre} al carrito?`);
                         if (confirmarProducto)
                         {
-                            cantidades = $(`.selector${yerbaItem.id}`).val();
-                            alert(`Agregaste ${cantidades} de ${yerbaItem.nombre} al carrito`);
+                            alert(`Agregaste ${cantidades} unidad/es de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
                             return false;
                         }
 
-//AGREGAR AL CARRITO CADA PRODUCTO + JSON STORAGE
+//AGREGAR AL CARRITO CADA PRODUCTO
                         carrito.push(yerbaItem);
-                        localStorage.setItem('carrito', JSON.stringify(carrito));
-             
-// AGREGO EL PRECIO DEL CARRITO AL DOM
-                        precioRecuperado  = precioRecuperado + yerbaItem.precio;
-                        $("#precioDelCarrito").text();
-                        $("#precioDelCarrito").text(`El valor de su compra es: $${precioRecuperado}`);
-             
-// AGREGO LOS PRODUCTOS DEL CARRITO AL DOM
-                        $("#productosEnCarrito").append(`<li>${yerbaItem.nombre}</li>`);
 
-                        //RESETEO
-                        cantidades=1;
-                        $(".selector").val(1);                    
+                        agregarAlListado();
+
+// ACTUALIZO EL CONTADOR DEL CARRITO
+                        contadorCarrito();
+
+// GUARDO INFORMACION EN JSON STORAGE 
+                        localStorage.setItem('carrito', JSON.stringify(carrito));
+
                     })          
             }
         }
     })
 };
 
+// AGREGAR AL DOM - A LA LISTA DESPLEGABLE
+let nombreListado;
+let cantidadesListado=1;
+let precioListado=0;
+let carritoItem=[];
+
+function agregarAlListado()
+{
+    for (nombreListado of carrito)
+    {
+        carritoItem.push(nombreListado);
+    }
+    // $("#tablaCarrito").append(`
+    //     <tr>
+    //         <td>${nombreListado}</td>
+    //         <td>${cantidadesListado}</td>
+    //         <td>${precioListado}</td>
+    //         <td>x</td>
+    //     </tr>`);
+}
+
+//BOTON PARA VER CARRITO -LISTA DESPLEGABLE
+$("#btnCarrito").click(function()
+{
+    $("#listaCarrito").toggle();
+})
+
+// FUNCION QUE ACTUALIZA EL CONTADOR DEL CARRITO
+function contadorCarrito()
+{
+contador = carrito.length;
+$("#contador").text(``);
+$("#contador").text(`${contador}`);
+};
 
 // BOTON PARA CONFIRMAR COMPRA
-
 $("#btnConfirmar").click(function()
     {
         let confirmarCompra = confirm("¿Desea confirmar la compra?");
@@ -122,7 +138,6 @@ $("#btnConfirmar").click(function()
 );
 
 // BOTON PARA LIMPIAR CARRITO
-
 $("#borrarCarrito").click(function()
 {
     let limpiarCarrito = confirm("¿Desea borrar el carrito?");
@@ -131,8 +146,9 @@ $("#borrarCarrito").click(function()
         carrito =[];
         precioRecuperado=0;
         localStorage.setItem('carrito', JSON.stringify(carrito));
-        $("#precioDelCarrito").text(`El valor de su compra es: $0`);
+        $("#precioDelCarrito").text(`Total: $0`);
         $("#productosEnCarrito").empty();
+        contadorCarrito();
     }
     else
     {
