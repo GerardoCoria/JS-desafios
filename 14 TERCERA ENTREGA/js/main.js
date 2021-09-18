@@ -16,26 +16,26 @@ var xhttp = new XMLHttpRequest();
 xhttp.open('GET', 'datos.json', true);
 // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRECIO:
   
-    for (const precio of carritoRecuperado)
-    {
-        precioRecuperado = precio.precio + precioRecuperado;
-    }
-    $("#precioDelCarrito").text(`Valor de la compra: $${precioRecuperado}`);
+//     for (const precio of carritoRecuperado)
+//     {
+//         precioRecuperado = precio.precio + precioRecuperado;
+//     }
+//     $("#precioDelCarrito").text(`Valor de la compra: $${precioRecuperado}`);
 
-// SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRODUCTOS:
+// // SI HAY PRODUCTOS EN EL CARRITO, MUESTRA PRODUCTOS:
 
-    for (const nombre of carritoRecuperado)
-    {
-        listaRecuperada.push(nombre.nombre+"<br>");
-    }
-    $("#productosEnCarrito").append(listaRecuperada);
+//     for (const nombre of carritoRecuperado)
+//     {
+//         listaRecuperada.push(nombre.nombre+"<br>");
+//     }
+//     $("#productosEnCarrito").append(listaRecuperada);
 
-// VUELVO A PUSHEAR LOS PRODUCTOS EN EL CARRITO
+// // VUELVO A PUSHEAR LOS PRODUCTOS EN EL CARRITO
 
-    for (const item of carritoRecuperado)
-    {
-        carrito.push(item);
-    }
+//     for (const item of carritoRecuperado)
+//     {
+//         carrito.push(item);
+//     }
 
 // MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE Y BOTONES 
 
@@ -50,12 +50,6 @@ xhttp.open('GET', 'datos.json', true);
                     <h3>${yerbaItem.nombre}</h3>
                     <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
-                    <span>Cantidad:</span>
-                    <select name="" id="">
-                    <option value="1"${1}>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    </select>
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 

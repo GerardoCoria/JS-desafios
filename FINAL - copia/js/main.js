@@ -6,7 +6,9 @@ let carritoRecuperado = JSON.parse(localStorage.getItem('carrito'));
 let listaRecuperada =[];
 let precioRecuperado= 0;
 let precioActualizado=0;
+let cantidades=1;
 let contador=0;
+let carritoAux = [];
 let carritoListado = [];
 
 // FUNCIONES POR SI LA PAGINA SE RECARGA ACCIDENTALMENTE
@@ -34,6 +36,7 @@ function mostrarCarritoRecuperado()
 
 // ACTUALIZO EL CONTADOR DEL CARRITO
         contadorCarrito();
+
 }
 
 // MUESTRA LOS PRODUCTOS, CON SU INFORMACION CORRESPONDIENTE E INPUTS
@@ -47,19 +50,23 @@ function mostrarOferta()
             for (const yerbaItem of datosYerbas)
             {
                 $("#ofertaImpresa").append(
-                    `<div id="yerbaCard">
-                    <h3 id="nombre">${yerbaItem.nombre}</h3>
-                    <p id="precio">Precio: $${yerbaItem.precio}</p>
+                    `<div>
+                    <h3>${yerbaItem.nombre}</h3>
+                    <p>Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
+                    <span>Cantidad:</span>
+                    <input class="selector${yerbaItem.id}" type="number" min="1" max="10" value="1">
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 // BOTON PARA COMPRAR                   
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
+                        cantidades = parseInt($(`.selector${yerbaItem.id}`).val());
+                        yerbaItem.cantidad = cantidades;
+                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito?`);
                         if (confirmarProducto)
                         {
-                            alert(`Agregaste ${yerbaItem.nombre} al carrito`);
+                            alert(`Agregaste ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
@@ -68,15 +75,13 @@ function mostrarOferta()
 
 //AGREGAR AL CARRITO CADA PRODUCTO
                         carrito.push(yerbaItem);
-                        // var yerbaCard = ($(`.yerbaCard${yerbaItem.id}`));
-                        // guardarEnCarrito(yerbaItem);
                               
 // GUARDO INFORMACION EN JSON STORAGE 
                         localStorage.setItem('carrito', JSON.stringify(carrito));
 
 // ACTUALIZO EL CONTADOR DEL CARRITO
                         contadorCarrito();
-                        // agregarAlListado();
+                        agregarAlListado();
 
                     })          
             }
@@ -85,37 +90,26 @@ function mostrarOferta()
 };
 
 // AGREGAR AL DOM - A LA LISTA DESPLEGABLE
-// let carritoAux={};
 
-// let guardarEnCarrito = (yerbaItem) =>{
-//     let itemCarrito =
-//     {
-//         id: 2,
-//         nombre: document.getElementById("nombre").textContent,
-//         precio: document.getElementById("precio").textContent,
-//         cantidad: 1,
-//     };
-// if (carritoAux.hasOwnProperty(itemCarrito.id))
-// {
-//     itemCarrito.cantidad = carritoAux[itemCarrito.id].cantidad + 1;
-// }
+let nombreListado;
+let cantidadesListado=1;
+let precioListado=0;
+let carritoItem=[];
 
-//     carritoAux[itemCarrito.id] = {...itemCarrito};
-// }
-
-// function agregarAlListado()
-// {
-//     // $("#tablaCarrito").empty();
-//     // for (yerbaItem of carrito)
-//     // {
-//     // $("#tablaCarrito").append(`
-//     //     <tr>
-//     //         <td>${yerbaItem.nombre}</td>
-//     //         <td>cantidad</td>
-//     //         <td>${yerbaItem.precio}</td>
-//     //         <td>x</td>
-//     //     </tr>`);
-// }
+function agregarAlListado()
+{carritoItem.push(carrito);
+    for (items of carritoItem)
+    {
+        
+    $("#tablaCarrito").append(`
+        <tr>
+            <td>${nombreListado}</td>
+            <td>${cantidadesListado}</td>
+            <td>${precioListado}</td>
+            <td>x</td>
+        </tr>`);
+    }
+}
 
 //BOTON PARA VER CARRITO -LISTA DESPLEGABLE
 $("#btnCarrito").click(function()
