@@ -1,5 +1,4 @@
 // VARIABLES GLOBALES
-
 let formulario = $("#formulario")
 let nombreComprador = formulario.children[0];
 let apellidoComprador = formulario.children[1];
@@ -7,37 +6,33 @@ let domicilioComprador = formulario.children[2];
 let localidadComprador = formulario.children[3];
 let tarjetaComprador = formulario.children[4];
 let claveComprador = formulario.children[5];
+let cuotas = parseInt(formulario.children[8]);
+let carritoRecuperado = JSON.parse(localStorage.getItem('carrito')); 
+let precioTotal=0;
+let aPagarXCuota =0; 
 
-// MUESTRO EL CARRITO CUANDO CARGUE LA PÁGINA
-$(document).ready(function()
-{
-    imprimirCarrito();
-
-    $("#formulario").hide(0,function()
-    {
-        $("#formulario").slideDown(5000);
-    });
-});
-
-let nombre;
 
 function imprimirCarrito()
 {
-    let carritoRecuperado = JSON.parse(localStorage.getItem('carrito')); 
-    let listaRecuperada =[];
-    let precioRecuperado=0;
-
-    for (const precio of carritoRecuperado)
-    {
-        precioRecuperado= precio.precio + precioRecuperado;
-    }
-    $("#precioAPagar").append(`A pagar: $${precioRecuperado}`);
-
-    for (const nombre of carritoRecuperado)
-    {
-        listaRecuperada.push(nombre.nombre+"<br>");
-    }
-    $("#productosAPagar").append(listaRecuperada);
+    Object.values(carritoRecuperado).forEach(productoItem =>{
+        $("#productosAPagar").append(`
+        <tr>")
+            <td>${productoItem.nombre}</td>
+            <td>${productoItem.cantidad}</td>
+            <td>$${productoItem.precio}</td>
+            <td>$${productoItem.precio * productoItem.cantidad}</td>
+            </tr>`);
+        }
+        );
+        sumarTotalAPagar();
+};
+// Sumar precio total
+function sumarTotalAPagar()
+{
+    precioTotal = Object.values(carritoRecuperado).reduce((acumular,{cantidad, precio})=>
+    acumular+cantidad*precio,0);
+    $("#totalAPagar").text("");
+    $("#totalAPagar").text(`Total a abonar: $${precioTotal}`);
 }
 
 // CONFIRMAR COMPRA
@@ -53,9 +48,7 @@ $("#formulario").submit(function(e)
     localidadComprador = formulario.children[3].value;
     tarjetaComprador = formulario.children[4].value;
     claveComprador = formulario.children[5].value;
-
-    
-  
+   
 
     if (nombreComprador ==="" || apellidoComprador==="" || domicilioComprador==="" || localidadComprador==="" || tarjetaComprador==="" || claveComprador==="")
     {
@@ -68,6 +61,26 @@ $("#formulario").submit(function(e)
 }
 )
 
+// Calcular cuotas
+function calcularCuotas()
+{
+    cuotas = $("#cuotas").val();
+    aPagarXCuota = precioTotal / cuotas;
+    return aPagarXCuota.toFixed(2);
+}
+
+function imprimirCuotas()
+{
+    $("#cuotasDOM").text("");
+    $("#cuotasDOM").text(`Precio por cada cuota: $${calcularCuotas()}`);
+}
+
+$("#cuotas").change(function(e)
+{
+    imprimirCuotas();
+});
+
+// Confirmar compra
 function confirmarCompra()
 {
     alert (`${nombreComprador}, su compra ha sido exitosa!`)
@@ -85,3 +98,10 @@ $("#btnCancelar").click((e)=>
     $("#tarjetaForm").val("");
     $("#claveForm").val("");
 });
+
+// MUESTRO EL CARRITO CUANDO CARGUE LA PÁGINA
+$(document).ready(
+    imprimirCarrito(),
+    imprimirCuotas()
+)
+    

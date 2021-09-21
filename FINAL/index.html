@@ -17,22 +17,28 @@
         <section id="carritoDeCompras" class="fondoVerde">
             <img src="media/carrito2.png" alt="" height="40px" class="fondoVerde">
             <button id="btnCarrito">Carrito</button>
-            <span id="contador"></span>
+            <span id="contador">0</span>
         </section>
         <!-- LISTA DEL CARRITO -->
         <section id="listaCarrito">
-            <table id="tablaCarrito">
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio unitario</th>
-                    <th>Precio total</th>
-                </tr>
-            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio unitario</th>
+                        <th>Precio total</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCarrito">
 
+                </tbody>   
+            </table>
+            <span id="totalCompra">Total: $0</span>
             <!-- BOTONES -->
             <button  id="btnConfirmar"><a href="html/pago.html">Confirmar compra</a></button>
             <button id="borrarCarrito" class="rojo">Limpiar carrito</button>
+
         </section>
     </header>
 
