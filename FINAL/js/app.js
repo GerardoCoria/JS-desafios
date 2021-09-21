@@ -1,17 +1,19 @@
-// VARIABLES GLOBALES
+// Variables globales a usar
 let formulario = $("#formulario")
 let nombreComprador = formulario.children[0];
 let apellidoComprador = formulario.children[1];
 let domicilioComprador = formulario.children[2];
 let localidadComprador = formulario.children[3];
-let tarjetaComprador = formulario.children[4];
-let claveComprador = formulario.children[5];
+let emailComprador = formulario.children[4];
+let tarjetaComprador = formulario.children[5];
+let claveComprador = formulario.children[6];
+let vencimientoTarjeta = formulario.children[7];
 let cuotas = parseInt(formulario.children[8]);
 let carritoRecuperado = JSON.parse(localStorage.getItem('carrito')); 
 let precioTotal=0;
-let aPagarXCuota =0; 
+let aPagarXCuota =0;
 
-
+// Imprimo el carrito con los productos y el precio que el cliente comprará
 function imprimirCarrito()
 {
     Object.values(carritoRecuperado).forEach(productoItem =>{
@@ -26,6 +28,7 @@ function imprimirCarrito()
         );
         sumarTotalAPagar();
 };
+
 // Sumar precio total
 function sumarTotalAPagar()
 {
@@ -46,11 +49,12 @@ $("#formulario").submit(function(e)
     apellidoComprador = formulario.children[1].value;
     domicilioComprador = formulario.children[2].value;
     localidadComprador = formulario.children[3].value;
-    tarjetaComprador = formulario.children[4].value;
-    claveComprador = formulario.children[5].value;
-   
+    emailComprador = formulario.children[4].value;
+    tarjetaComprador = formulario.children[5].value;
+    claveComprador = formulario.children[6].value;
+    vencimientoTarjeta = formulario.children[7].value;
 
-    if (nombreComprador ==="" || apellidoComprador==="" || domicilioComprador==="" || localidadComprador==="" || tarjetaComprador==="" || claveComprador==="")
+    if (nombreComprador ==="" || apellidoComprador==="" || domicilioComprador==="" || localidadComprador==="" || emailComprador==="" || tarjetaComprador==="" || claveComprador==="" || vencimientoTarjeta==="")
     {
         alert("Por favor, ingrese todos los datos")
     }

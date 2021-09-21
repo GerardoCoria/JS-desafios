@@ -53,16 +53,21 @@ function mostrarOferta()
                     <h3 id="nombre">${yerbaItem.nombre}</h3>
                     <p id="precio">Precio: $${yerbaItem.precio}</p>
                     <img src=${yerbaItem.imagen}>
+                    <span>Cantidad:</span>
+                    <input class="selector${yerbaItem.id}" type="number" min="1" max="10" value="1">
                     <button id="btn${yerbaItem.id}">Agregar al carrito</button>
                     </div>`);
 
                     //Botón para comprar              
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.nombre} al carrito?`);
+                        cantidades = parseInt($(`.selector${yerbaItem.id}`).val());
+                        yerbaItem.cantidad = cantidades;
+
+                        let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito?`);
                         if (confirmarProducto)
                         {
-                            alert(`Agregaste ${yerbaItem.nombre} al carrito`);
+                            alert(`Agregaste ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito`);
                         }
                         else
                         {
@@ -74,12 +79,12 @@ function mostrarOferta()
                             id: yerbaItem.id,
                             nombre: yerbaItem.nombre,
                             precio: yerbaItem.precio,
-                            cantidad: 1
+                            cantidad: yerbaItem.cantidad
                         }
                         //En caso de que el producto ya esté en el carrito, sólo se agrega cantidad
                         if(carritoAux.hasOwnProperty(yerbaItem.id))
                         {
-                            productoItem.cantidad = carritoAux[yerbaItem.id].cantidad+1;
+                            productoItem.cantidad = carritoAux[yerbaItem.id].cantidad+yerbaItem.cantidad;
                         }
                         //En caso de que el producto NO esté, se pushea el item
                         carritoAux[productoItem.id] = {...productoItem};
