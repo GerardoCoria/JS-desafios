@@ -1,3 +1,4 @@
+/* Configuraciones generales */
 @import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
 
 * 
@@ -7,11 +8,39 @@
 	background: lightgreen;
 }
 
+.fondoVerde
+{
+	background-color: darkgreen;
+}
+
+.fondoBlanco
+{
+	background-color: white;
+}
+
+.fondoGris
+{
+	background-color: rgba(245, 245, 245, 0.829);
+}
+
+a 
+{
+	background-color: darkgreen;
+	color: white;
+	text-decoration: none;
+}
+
+a:visited
+{
+	color: white;
+}
+
+/* Secciones generales de la interfaz */
 body
 {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 20vh 200px auto 20vh;
+	grid-template-rows: 20vh 200px auto 10vh;
 	grid-template-areas: 
 	"header"
 	"intro"
@@ -23,13 +52,13 @@ footer
 {
 	grid-area: footer;
 	background-color: darkgreen;
+	color: white;
+	font-size: 1vw;
+	padding: 10px;
+	text-align: center;
 }
 
-.fondoVerde
-{
-	background-color: darkgreen;
-}
-
+/* Configuración del encabezado */
 header
 {
 	display: grid;
@@ -47,9 +76,18 @@ header
 	display: flex;
 	grid-area: titulo;
 	justify-content:flex-start;
-	align-items: center;
+	align-content: center;
 }
 
+h1 
+{
+	font-size: 50px;
+	text-align: left;
+	color: white;
+	height: 20vh;
+}
+
+/* Carrito de compras */
 #carritoDeCompras
 {
 	display: flex;
@@ -87,14 +125,100 @@ header
 	font-weight: bold;
 }
 
-h1 
+/* Lista desplegable del carrito */
+#listaCarrito
 {
-	font-size: 50px;
-	text-align: left;
-	color: white;
-	height: 20vh;
+	display: none;
+	position: absolute;
+	top: 18vh;
+	left: 45%;
+	width: auto;
+	border-radius: 20px;
+	z-index: 999;
 }
 
+table
+{
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border-radius: 20px 20px 20px 20px;
+
+}
+
+th
+{
+	background-color:  rgb(1, 71, 1);
+	color: white;
+	padding: 10px;
+}
+
+th:first-child
+{
+	border-radius: 20px 0 0 0;
+}
+
+th:nth-child(4)
+{
+	border-radius: 0 20px 0 0;
+}
+
+tr 
+{
+	padding: 5px;
+}
+
+tr:nth-child(even)>td
+{
+	background-color: rgb(119, 192, 119);
+}
+
+tr:hover td
+{
+	background-color: white;
+}
+
+td:first-child
+{
+	text-align: left;
+}
+
+td:nth-child(3)>td
+{
+	font-size: bold;
+}
+
+#pieCarrito
+{
+	background-color:  rgb(1, 71, 1);
+	padding: 10px 0;
+	border-radius: 0 0 20px 20px;
+}
+
+#pieCarrito span
+{
+	background-color:  rgb(1, 71, 1);
+	color: white;
+	padding: 0 2vw;
+	margin: 5px;
+}
+
+#btnConfirmar
+{
+	background-color: darkgreen;
+	border-radius: 20px;
+	margin: 0 2vw;
+}
+
+#borrarCarrito
+{
+	background-color: darkred;
+	border-radius: 20px;
+	color: white;
+	margin: 0 2vw;
+}
+
+/* Sección previa a las cards de productos ofertados*/
 #intro
 {
 	grid-area: intro;
@@ -118,47 +242,11 @@ h1
 	top: -10vh;
 }
 
-#listaCarrito
-{
-	display: none;
-	position: absolute;
-	top: 18vh;
-	left: 60%;
-	border: 1px solid black;
-	width: 35%;
-	background-color: grey;
-	z-index: 999;
-}
-
+/* Cards de productos ofertados */
 #ofertaImpresa img
 {
 	width: 150px;
 	height: 150px;
-}
-
-.fondoBlanco
-{
-	background-color: white;
-}
-
-ul
-{
-	padding: 0px;
-	list-style: none;
-}
-
-#formulario
-{
-	width: 80%;
-	margin: 0 10%;
-}
-
-form input
-{
-	display: inline-block;
-	margin: 15px 10px;
-	width: 40%;
-	padding: 5px;
 }
 
 #ofertaImpresa
@@ -176,7 +264,7 @@ form input
 	background-color: whitesmoke;
 	flex-direction: column;
 	width: 200px;
-	height: 300px;
+	height: 350px;
 	align-items: center;
 	margin: 10px 0;
 	border-radius: 10px;
@@ -190,31 +278,45 @@ form input
 	background-color: whitesmoke;
 }
 
-select
+#divSumarRestar
 {
-	width: 80px;
-}
+	padding: 10px;
+} 
 
-#btnComprar
+.btnResta
 {
 	background-color: darkgreen;
 	color: white;
+	font-size: 20px;
+	padding: 0 10px;
+	border-radius: 50% 0 0 50%;
+}
+
+.btnNumero
+{
+	background-color: black;
+	color: white;
+	padding: 5px 10px;
+}
+
+.btnSuma
+{
+	background-color: darkgreen;
+	color: white;
+	font-size: 20px;
+	padding: 0 10px;
+	border-radius: 0 50% 50% 0;
+}
+
+.btnAgregar
+{
+	background-color: darkgreen;
+	color: white;
+	padding: 5px 10px;
 	border-radius: 20px;
-	font-size: 15px;
 }
 
-a 
-{
-	background-color: darkgreen;
-	color: white;
-	text-decoration: none;
-}
-
-a:visited
-{
-	color: white;
-}
-
+/* Listado de productos seleccionados y listos para comprar */
 #listoParaComprar
 {
 	background-color: white;
@@ -223,6 +325,26 @@ a:visited
 	border: 1px solid black;
 	border-radius: 20px;
 	padding: 10px;
+}
+
+#productosAPagar
+{
+	font-weight: bold;
+}
+
+/* Formulario para finalizar la compra */
+#formulario
+{
+	width: 80%;
+	margin: 0 10%;
+}
+
+form input
+{
+	display: inline-block;
+	margin: 15px 10px;
+	width: 40%;
+	padding: 5px;
 }
 
 input
@@ -244,14 +366,12 @@ input:focus
 	color: white;
 }
 
-#productosAPagar
+#btnComprar
 {
-	font-weight: bold;
-}
-
-.rojo
-{
-	background-color: darkred;
+	background-color: darkgreen;
+	color: white;
+	border-radius: 20px;
+	font-size: 15px;
 }
 
 #btnCancelar

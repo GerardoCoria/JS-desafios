@@ -49,20 +49,25 @@ function mostrarOferta()
             for (const yerbaItem of datosYerbas)
             {
                 $("#ofertaImpresa").append(
-                    `<div id="yerbaCard${yerbaItem.id}">
+                    `<div id="yerbaCard">
                     <h3 id="nombre">${yerbaItem.nombre}</h3>
-                    <p id="precio">Precio: $${yerbaItem.precio}</p>
+                    <p id="precio" class="fondoGris">Precio: <strong class="fondoGris">$${yerbaItem.precio}</strong></p>
                     <img src=${yerbaItem.imagen}>
-                    <span>Cantidad:</span>
-                    <input class="selector${yerbaItem.id}" type="number" min="1" max="10" value="1">
-                    <button id="btn${yerbaItem.id}">Agregar al carrito</button>
+                    <span class="fondoGris">Elija la cantidad:</span>
+                    <section id="divSumarRestar" class="fondoGris">
+                    <button id="restar${yerbaItem.id}" class="btnResta">-</button>
+                    <span class="selector${yerbaItem.id} btnNumero">1</span>
+                    <button id="sumar${yerbaItem.id}" class="btnSuma">+</button>
+                    </section>
+                    <button id="btn${yerbaItem.id}" class="btnAgregar">Agregar al carrito</button>
                     </div>`);
 
                     //Botón para comprar              
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        cantidades = parseInt($(`.selector${yerbaItem.id}`).val());
-                        yerbaItem.cantidad = cantidades;
+                        // cantidades = parseInt($(`.selector${yerbaItem.id}`).val());
+                        $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
+                        // yerbaItem.cantidad = cantidades;
 
                         let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito?`);
                         if (confirmarProducto)
@@ -110,7 +115,41 @@ function mostrarOferta()
 
                         // Actualizo el contador del carrito
                         contadorCarrito();
-                    })          
+                    })   
+                    
+                    // Botón para sumar cantidades de items
+                    $(`#sumar${yerbaItem.id}`).on("click", function()
+                    {
+                        if (yerbaItem.cantidad>9)
+                        {
+                            return false;
+                        }
+                        else 
+                        {
+                            yerbaItem.cantidad++;
+                            parseInt($(`.selector${yerbaItem.id}`).val(yerbaItem.cantidad));
+                            console.log(yerbaItem.cantidad);
+                            $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
+
+                        }        
+                    });
+
+                    // Botón para restar cantidades de items
+                    $(`#restar${yerbaItem.id}`).on("click", function()
+                    {
+                        if (yerbaItem.cantidad<2)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                        yerbaItem.cantidad--;
+                        parseInt($(`.selector${yerbaItem.id}`).val(yerbaItem.cantidad));
+                        console.log(yerbaItem.cantidad);
+                        $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
+
+                        }
+                    });
             }
         }
     })
