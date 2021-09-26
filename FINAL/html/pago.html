@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medios de pago</title>
+    <link rel="icon" href="../media/mate-icono.png">
     <link rel="stylesheet" type="text/css" href="../css/estilo.css">
 </head>
 <body id="bodyPago">
@@ -11,12 +12,14 @@
     <header class="fondoVerde">
         <!-- TITULO Y LOGO -->
         <section id="titulo" class="fondoVerde">
-            <h1 class="fondoVerde">Tomemos mate! <img src="../media/mate-icono.png" alt="" width="50px" class="fondoVerde"> Tienda online</h1>
+            <h1 class="fondoVerde letraBlanca">Tomemos mate! <img src="../media/mate-icono.png" alt="" width="50px" class="fondoVerde"> Tienda online</h1>
         </section>
     </header>
     <!-- INTRO A LA PAGINA DE PAGO -->
     <section id="introPago">
-        <p>Ingresá tus datos para finalizar tu compra:</p>
+        <div>
+            <p>Ingresá tus datos para finalizar tu compra:</p>
+        </div>
     </section>
     <!-- LISTADO FINAL DE PRODUCTOS ELEGIDOS -->
     <section id="listoParaComprar">
@@ -45,7 +48,7 @@
             <input id="tarjetaForm" type="number" placeholder="Tarjeta de crédito / débito" >
             <input id="claveForm" type="number" placeholder="Clave de seguridad" >
             <label for="vencimientoTarjeta">Vencimiento de la tarjeta:</label>
-            <input id="vencimientoTarjeta" type="month" value="2021-10" min="2021-10"><br>
+            <input id="vencimientoTarjeta" class="letraBlanca" type="month" value="2021-10" min="2021-10"><br>
             <label for="cuotas">Elija el número de cuotas:</label><br>
             <select name="" id="cuotas">
                 <option value="1" class="opcion">En un pago</option>

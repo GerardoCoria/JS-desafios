@@ -18,18 +18,17 @@ function imprimirCarrito()
 {
     Object.values(carritoRecuperado).forEach(productoItem =>{
         $("#productosAPagar").append(`
-        <tr>")
-            <td>${productoItem.nombre}</td>
-            <td>${productoItem.cantidad}</td>
-            <td>$${productoItem.precio}</td>
-            <td>$${productoItem.precio * productoItem.cantidad}</td>
+            <tr>")
+                <td>${productoItem.nombre}</td>
+                <td>${productoItem.cantidad}</td>
+                <td>$${productoItem.precio}</td>
+                <td>$${productoItem.precio * productoItem.cantidad}</td>
             </tr>`);
-        }
-        );
-        sumarTotalAPagar();
+        });
+    sumarTotalAPagar();
 };
 
-// Sumar precio total
+// Sumar precio total de la compra a confirmar
 function sumarTotalAPagar()
 {
     precioTotal = Object.values(carritoRecuperado).reduce((acumular,{cantidad, precio})=>
@@ -38,13 +37,13 @@ function sumarTotalAPagar()
     $("#totalAPagar").text(`Total a abonar: $${precioTotal}`);
 }
 
-// CONFIRMAR COMPRA
-
+// Botón para confirmar compra
 $("#formulario").submit(function(e)
 {
     e.preventDefault();
     let formulario = e.target;
 
+    // Captar los valores de los inputs
     nombreComprador = formulario.children[0].value;
     apellidoComprador = formulario.children[1].value;
     domicilioComprador = formulario.children[2].value;
@@ -54,6 +53,7 @@ $("#formulario").submit(function(e)
     claveComprador = formulario.children[6].value;
     vencimientoTarjeta = formulario.children[7].value;
 
+    // Validar formulario
     if (nombreComprador ==="" || apellidoComprador==="" || domicilioComprador==="" || localidadComprador==="" || emailComprador==="" || tarjetaComprador==="" || claveComprador==="" || vencimientoTarjeta==="")
     {
         alert("Por favor, ingrese todos los datos")
@@ -62,10 +62,21 @@ $("#formulario").submit(function(e)
     {
         confirmarCompra()
     }
-}
-)
+})
 
-// Calcular cuotas
+// Funciones para calcular cuotas
+// Función que inicia el proceso (llamando al cálculo de cuotas)
+function imprimirCuotas()
+{
+    $("#cuotasDOM").text("");
+    $("#cuotasDOM").text(`Precio por cada cuota: $${calcularCuotas()}`);
+}
+// Capta el cambio en el input respecto a las cantidades de cuotas elegidas por el cliente
+$("#cuotas").change(function(e)
+{
+    imprimirCuotas();
+});
+// Calcula el valor de cada cuota según el precio total del carrito y las cuotas elegidas por el cliente
 function calcularCuotas()
 {
     cuotas = $("#cuotas").val();
@@ -73,27 +84,16 @@ function calcularCuotas()
     return aPagarXCuota.toFixed(2);
 }
 
-function imprimirCuotas()
-{
-    $("#cuotasDOM").text("");
-    $("#cuotasDOM").text(`Precio por cada cuota: $${calcularCuotas()}`);
-}
-
-$("#cuotas").change(function(e)
-{
-    imprimirCuotas();
-});
-
 // Confirmar compra
 function confirmarCompra()
 {
     alert (`${nombreComprador}, su compra ha sido exitosa!`)
 }
 
-// CANCELAR COMPRA
-
+// Botón para cancelar compra
 $("#btnCancelar").click((e)=>
 {
+    // Reseteo los espacios del formuario, los vuelvo a poner en blanco
     alert("Ha cancelado su compra");
     $("#nombreForm").val("");
     $("#apellidoForm").val("");
@@ -101,11 +101,22 @@ $("#btnCancelar").click((e)=>
     $("#localidadForm").val("");
     $("#tarjetaForm").val("");
     $("#claveForm").val("");
+    $("#mail").val("");
 });
 
-// MUESTRO EL CARRITO CUANDO CARGUE LA PÁGINA
+// A mostrar cuando cargue la página
 $(document).ready(
     imprimirCarrito(),
-    imprimirCuotas()
+    imprimirCuotas(),
+
+    $("#listoParaComprar").hide(0,function() 
+    {
+        $("#listoParaComprar").slideDown(1000);
+    }),
+
+    $("#formulario").hide(0,function()
+    {
+        $("#formulario").fadeIn(1000);
+    })
 )
     
