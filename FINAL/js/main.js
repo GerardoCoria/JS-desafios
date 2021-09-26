@@ -1,23 +1,18 @@
 // Declaro las variables globales a utilizar
-let carrito =[];
-let listaPrecio = 0;
 let linkJson = "https://raw.githubusercontent.com/GerardoCoria/JS-desafios/main/FINAL/js/datos.json";
 let carritoRecuperado = JSON.parse(localStorage.getItem('carrito')); 
-let listaRecuperada =[];
-let precioRecuperado= 0;
-let precioActualizado=0;
 let contador=0;
-let carritoListado = [];
 let carritoAux={};
 let productoItem = {};
 let contadorPrecioTotal=0;
 
-// Funciones para mostrar carrito, por si la página se recarga accidentalmente
+// Función para mostrar carrito, por si la página se recarga accidentalmente
 function mostrarCarritoRecuperado()
 {
-//Recupero la lista del carrito
-Object.values(carritoRecuperado).forEach(productoItem =>{
+    // Recupero la lista de productos del carrito
+    Object.values(carritoRecuperado).forEach(productoItem =>{
     carritoAux[productoItem.id] = {...productoItem};
+    // Imprimo el carrito recuperado
     $("#tablaCarrito").text("");
     Object.values(carritoAux).forEach(productoItem =>{
         $("#tablaCarrito").append(`
@@ -27,12 +22,11 @@ Object.values(carritoRecuperado).forEach(productoItem =>{
             <td>$${productoItem.precio}</td>
             <td>$${productoItem.precio * productoItem.cantidad}</td>
         </tr>`);
-        }
-        );
-});
-//Recupero el total de compra
+        });
+    });
+    //Recupero el total de compra
     sumarTotal();
-//Recupero el contador del carrito
+    //Recupero el contador del carrito
     contadorCarrito();
 }
 
@@ -49,6 +43,7 @@ function mostrarOferta()
             for (const yerbaItem of datosYerbas)
             {
                 $("#ofertaImpresa").append(
+                    // Datos que vienen del archivo Json
                     `<div id="yerbaCard">
                     <h3 id="nombre">${yerbaItem.nombre}</h3>
                     <p id="precio" class="fondoGris">Precio: <strong class="fondoGris">$${yerbaItem.precio}</strong></p>
@@ -65,10 +60,9 @@ function mostrarOferta()
                     //Botón para comprar              
                     $(`#btn${yerbaItem.id}`).on("click", function () 
                     {
-                        // cantidades = parseInt($(`.selector${yerbaItem.id}`).val());
+                        // Capto la cantidad que seleccionó el cliente
                         $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
-                        // yerbaItem.cantidad = cantidades;
-
+                        // Muestro un mensaje de confirmación, antes de que el cliente agregue el producto
                         let confirmarProducto = confirm (`¿Está seguro de agregar ${yerbaItem.cantidad} unidad/es de ${yerbaItem.nombre} al carrito?`);
                         if (confirmarProducto)
                         {
@@ -78,7 +72,6 @@ function mostrarOferta()
                         {
                             return false;
                         }
-
                         //Armo el item producto para poder agregarlos al carrito
                         productoItem = {
                             id: yerbaItem.id,
@@ -86,38 +79,34 @@ function mostrarOferta()
                             precio: yerbaItem.precio,
                             cantidad: yerbaItem.cantidad
                         }
-                        //En caso de que el producto ya esté en el carrito, sólo se agrega cantidad
+                        //En caso de que el producto ya esté en el carrito, sólo se agrega la cantidad indicada
                         if(carritoAux.hasOwnProperty(yerbaItem.id))
                         {
                             productoItem.cantidad = carritoAux[yerbaItem.id].cantidad+yerbaItem.cantidad;
                         }
-                        //En caso de que el producto NO esté, se pushea el item
+                        //En caso de que el producto NO esté, se agrega el item al carrito
                         carritoAux[productoItem.id] = {...productoItem};
                         console.log(carritoAux);
-
-                        //Agrego al DOM - Lista desplegrable
+                        //Agrego el carrito con la actualización al DOM, en la lista desplegrable
                         $("#tablaCarrito").text("");
                         Object.values(carritoAux).forEach(productoItem =>{
-                        $("#tablaCarrito").append(`
-                        <tr>")
-                            <td>${productoItem.nombre}</td>
-                            <td>${productoItem.cantidad}</td>
-                            <td>$${productoItem.precio}</td>
-                            <td>$${productoItem.precio * productoItem.cantidad}</td>
-                        </tr>`);
-                        }
-                        );
+                            $("#tablaCarrito").append(`
+                            <tr>")
+                                <td>${productoItem.nombre}</td>
+                                <td>${productoItem.cantidad}</td>
+                                <td>$${productoItem.precio}</td>
+                                <td>$${productoItem.precio * productoItem.cantidad}</td>
+                            </tr>`);
+                        });
+                        // Actualizo la suma total del precio del carrito
                         sumarTotal();
-                    
-                        
                         // Guardo información en Storage
                         localStorage.setItem('carrito', JSON.stringify(carritoAux));
-
                         // Actualizo el contador del carrito
                         contadorCarrito();
                     })   
                     
-                    // Botón para sumar cantidades de items
+                    // Botón para aumentar cantidad del item
                     $(`#sumar${yerbaItem.id}`).on("click", function()
                     {
                         if (yerbaItem.cantidad>9)
@@ -130,11 +119,9 @@ function mostrarOferta()
                             parseInt($(`.selector${yerbaItem.id}`).val(yerbaItem.cantidad));
                             console.log(yerbaItem.cantidad);
                             $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
-
                         }        
                     });
-
-                    // Botón para restar cantidades de items
+                    // Botón para disminuir cantidad del item
                     $(`#restar${yerbaItem.id}`).on("click", function()
                     {
                         if (yerbaItem.cantidad<2)
@@ -143,11 +130,10 @@ function mostrarOferta()
                         }
                         else
                         {
-                        yerbaItem.cantidad--;
-                        parseInt($(`.selector${yerbaItem.id}`).val(yerbaItem.cantidad));
-                        console.log(yerbaItem.cantidad);
-                        $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
-
+                            yerbaItem.cantidad--;
+                            parseInt($(`.selector${yerbaItem.id}`).val(yerbaItem.cantidad));
+                            console.log(yerbaItem.cantidad);
+                            $(`.selector${yerbaItem.id}`).text(`${yerbaItem.cantidad}`);
                         }
                     });
             }
@@ -161,14 +147,13 @@ $("#btnCarrito").click(function()
     $("#listaCarrito").toggle();
 })
 
-// Actualiza el contador del carrito
+// Actualizar el contador del carrito
 function contadorCarrito()
 {
-contador =  Object.values(carritoAux).reduce((acumular,{cantidad})=>
-acumular+cantidad,0); 
-
-$("#contador").text(``);
-$("#contador").text(`${contador}`);
+    contador =  Object.values(carritoAux).reduce((acumular,{cantidad})=>
+    acumular+cantidad,0); 
+    $("#contador").text(``);
+    $("#contador").text(`${contador}`);
 };
 
 // Sumar precio total
@@ -181,15 +166,16 @@ function sumarTotal()
     $("#totalCompra").text(`Total: $${contadorPrecioTotal}`);
 }
 
-
 // Botón para confirmar la compra
 $("#btnConfirmar").click(function()
     {
+        // Si el carrito está vacío, no podrá seguir a la página siguiente
         if (contador==0)
         {
             alert(`Su carrito está vacío!`);
             return false;
         }
+        // Si el carrito tiene al menos un producto, puede avanzar a la página de pagos
         else if (contador >0)
         {
             let confirmarCompra = confirm("¿Desea confirmar la compra?");
@@ -210,11 +196,15 @@ $("#borrarCarrito").click(function()
     let limpiarCarrito = confirm("¿Desea borrar el carrito?");
     if (limpiarCarrito)
     {
+        // Borro los items del carrito
         carritoAux = {};
         $("#tablaCarrito").text("");
+        // Reseteo el contador
         contadorCarrito();
+        // Reseteo el precio total a 0
         sumarTotal();
         $("#totalCompra").text(`Total: $${contadorPrecioTotal}`)
+        // Reseteo el localStorage
         localStorage.setItem('carrito', JSON.stringify(carritoAux));
     }
     else
