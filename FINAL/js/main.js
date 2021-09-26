@@ -144,7 +144,7 @@ function mostrarOferta()
 // Botón para ver u ocultar el carrito 
 $("#btnCarrito").click(function()
 {
-    $("#listaCarrito").toggle();
+    $("#listaCarrito").toggle(2000);
 })
 
 // Actualizar el contador del carrito

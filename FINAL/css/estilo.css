@@ -40,7 +40,7 @@ a:visited
 {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 20vh 200px auto 10vh;
+	grid-template-rows: 20vh 200px auto 12vh;
 	grid-template-areas: 
 	"header"
 	"intro"
