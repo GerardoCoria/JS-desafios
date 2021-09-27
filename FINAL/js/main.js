@@ -230,6 +230,7 @@ $("#volver").click(function(e)
 
 // Se ejecuta cuando se carga la página
 $(document).ready(
-    mostrarCarritoRecuperado(),
-    mostrarOferta ()
+    mostrarOferta (),
+        mostrarCarritoRecuperado()
+
 )
